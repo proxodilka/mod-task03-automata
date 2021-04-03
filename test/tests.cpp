@@ -67,30 +67,30 @@ TEST(AutomataTest, Basic) {
 //     EXPECT_EQ("Here is your coins, I don't need them anymore...\n", testing::internal::GetCapturedStdout());
 // }
 
-TEST(AutomataTest, IncorrectTransitions) {
-    Automata a;
+// TEST(AutomataTest, IncorrectTransitions) {
+//     Automata a;
     
-    // Putting coins into the off automat
-    ASSERT_THROW(a.coin(10), IncorrectTransitionError);
+//     // Putting coins into the off automat
+//     ASSERT_THROW(a.coin(10), IncorrectTransitionError);
 
-    a.on();
-    a.coin(10);
-    a.choice(0);
+//     a.on();
+//     a.coin(10);
+//     a.choice(0);
 
-    // Cook without check
-    ASSERT_THROW(a.cook(), IncorrectTransitionError);
+//     // Cook without check
+//     ASSERT_THROW(a.cook(), IncorrectTransitionError);
 
-    a.check();
+//     a.check();
 
-    // Cook after declined transaction
-    ASSERT_THROW(a.cook(), IncorrectTransitionError);
+//     // Cook after declined transaction
+//     ASSERT_THROW(a.cook(), IncorrectTransitionError);
 
-    a.coin(100);
-    a.choice(0);
-    a.check();
-    a.cook();
-    a.finish();
+//     a.coin(100);
+//     a.choice(0);
+//     a.check();
+//     a.cook();
+//     a.finish();
 
-    // Successful result even after few exceptions
-    EXPECT_EQ(a.get_state(), STATE::WAIT);
-}
+//     // Successful result even after few exceptions
+//     EXPECT_EQ(a.get_state(), STATE::WAIT);
+// }
