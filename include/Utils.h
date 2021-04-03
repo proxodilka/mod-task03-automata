@@ -24,7 +24,7 @@ struct Item {
     }
 };
 
-std::vector<Item> TEST_MENU = {
+static std::vector<Item> TEST_MENU = {
     {"Latte", 30},
     {"Cappuccino", 15},
     {"Hot chocolate", 20},
@@ -33,7 +33,7 @@ std::vector<Item> TEST_MENU = {
     {"Vesper Martini", 007}
 };
 
-std::ostream& operator<<(std::ostream& out, const Item& o) {
+static std::ostream& operator<<(std::ostream& out, const Item& o) {
     out << o.name << " " << o.price;
     return out;
 }
