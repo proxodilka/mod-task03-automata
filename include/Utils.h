@@ -24,7 +24,7 @@ struct Item {
     }
 };
 
-std::vector<Item> TEST_MENU = {
+static std::vector<Item> TEST_MENU = {
     {"Latte", 30},
     {"Cappuccino", 15},
     {"Hot chocolate", 20},
