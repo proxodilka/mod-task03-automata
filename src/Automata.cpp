@@ -116,8 +116,8 @@ void Automata::finish() {
 void Automata::init() {
     cash = 0;
     picked_item_idx = npos;
-    if (const char* filepath = std::getenv("MENU_PATH")) {
-        menu = Item::load_from_file(filepath);
+    if (false/*const char* filepath = std::getenv("MENU_PATH")*/) {
+        menu = Item::load_from_file("filepath");
     }
     else {
         menu = TEST_MENU;
