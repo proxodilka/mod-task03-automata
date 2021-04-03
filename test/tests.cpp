@@ -94,3 +94,30 @@ TEST(AutomataTest, IncorrectTransitions) {
     // Successful result even after few exceptions
     EXPECT_EQ(a.get_state(), STATE::WAIT);
 }
+
+template <typename T>
+void compare_vectors(const std::vector<T>& a, const std::vector<T>& b) {
+    ASSERT_EQ(a.size(), b.size());
+    for (size_t i=0; i<a.size(); i++) {
+        ASSERT_EQ(a[i], b[i]);
+    }
+}
+
+TEST(MenuTest, Basic) {
+    Automata a;
+
+    a.on();
+    EXPECT_TRUE(a.get_menu().size() > 0);
+}
+
+TEST(MenuTest, CustomMenu) {
+    std::vector<Item> test_menu {{"A", 1}, {"B", 2}, {"C", 3}};
+    Automata a(test_menu);
+    a.on();
+    compare_vectors(a.get_menu(), test_menu);
+
+    // Check that menu doesn't disappear after switching the machine
+    a.off();
+    a.on();
+    compare_vectors(a.get_menu(), test_menu);
+}

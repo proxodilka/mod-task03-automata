@@ -11,7 +11,7 @@ struct Item {
 
     Item(std::string name, size_t price): name(name), price(price) {}
 
-    static std::vector<Item> load_from_file(const char* filepath) {
+    static std::vector<Item> load_from_file(const std::string& filepath) {
         auto fin = std::ifstream(filepath);
         std::vector<Item> result;
         while (!fin.eof()) {
@@ -21,6 +21,10 @@ struct Item {
             result.emplace_back(name, price);
         }
         return result;
+    }
+
+    bool operator==(const Item& r) const {
+        return name == r.name && price == r.price;
     }
 };
 

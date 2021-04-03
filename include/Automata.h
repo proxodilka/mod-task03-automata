@@ -23,6 +23,9 @@ private:
     size_t picked_item_idx;
     STATE state;
 
+    const bool is_fixed_menu;
+    std::string menu_filepath;
+
     void warning(std::string message="incorrect transition") {
         std::cout << "WARNING: " << message << std::endl;
     }
@@ -33,8 +36,13 @@ private:
         std::cout << "Here is your coins, I don't need them anymore..." << std::endl;
     }
 
+    Automata(bool is_fixed_menu): cash(0), picked_item_idx(npos), state(STATE::OFF), is_fixed_menu(is_fixed_menu) { }
+
 public:
-    Automata(): cash(0), picked_item_idx(npos), state(STATE::OFF) { }
+    Automata(): Automata(false) {}
+    Automata(const std::vector<Item>& menu): Automata(true) { this->menu = menu; }
+    Automata(std::vector<Item>&& menu): Automata(true) { this->menu = std::move(menu); }
+    Automata(std::string menu_filepath): Automata(false) { this->menu_filepath = menu_filepath; }                              
     ~Automata() { off(); }
 
     void on();

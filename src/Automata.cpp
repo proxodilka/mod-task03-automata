@@ -42,7 +42,7 @@ void Automata::choice(size_t index) {
     switch (state)
     {
     case STATE::ACCEPT:
-        CHECK(index >= 0 && index < menu.size());
+        CHECK(index < menu.size());
         picked_item_idx = index;
         state = STATE::CHECK;
         break;
@@ -116,7 +116,13 @@ void Automata::finish() {
 void Automata::init() {
     cash = 0;
     picked_item_idx = npos;
-    if (const char* filepath = std::getenv("MENU_PATH")) {
+    if (is_fixed_menu) {
+        CHECK(menu.size() > 0);
+    }
+    else if (menu_filepath != "") {
+        menu = Item::load_from_file(menu_filepath);
+    }
+    else if (const char* filepath = std::getenv("MENU_PATH")) {
         menu = Item::load_from_file(filepath);
     }
     else {
